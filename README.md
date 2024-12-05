@@ -10,46 +10,93 @@
 - [Készítők](#készítők)
 - [Thanks](#thanks)
 - [Copyright and license](#copyright-and-license)
+- [Felhasznált segítségek, vagy inspirációk](#felhasznált-segítségek-vagy-inspirációk)
 
 
 ## Szoftverkövetelmények
 
-Some text
+##### Funkcionális követelmények
 
-- Instruction 1
-- Instruction 2
-- Instruction 3
+- A szoftver legyen képes egy felhasználót regisztrálni, adatait lekérni az adatbázisból, és azokat megjeleníteni
+- Legyen képes az adatokkal különböző műveleteket (összeadás, kivonás, időszakos megjelenítés) végrehajtani
+- Az adatokat képes legyen a megfelelő helyre, a megfelelő regisztrált fiókhoz csatolni
+
+#### Nem funkcionális követelmények
+
+- A rendszer képes legyen 1000 egyidejű felhasználót kiszolgálni.
+- Az adatok 256 bites titkosítással legyenek védve.
+- A válaszidő nem haladhatja meg az 1 másodpercet egy adott művelet esetén.
+
+#### Végfelhasználói követelmények
+
+- A felhasználó képes legyen jelszót visszaállítani e-mail segítségével.
+- A rendszer intuitív felhasználói felületet biztosítson érintőképernyőn.
 
 ## A szoftver célja
 
-Here goes all the budgets
+Egy hétköznapi személy pénzének a könnyű, átlátható, és praktikus kezelése. Ezt többféle módon lehet elérni, mely az emberek kényelmét támogatja, hisz sok funkciót tartalmaz magában.
 
 ## A szoftver funkciói
 
-Some text
+#### Főoldal:
+1.  Egyenleg összegének a megjelenítése
+2. Egyenleghez való hozzáadás
+3. Egyenlegből való levonás
+4. Többi funkciót tartalmazó ablak elérése egy legördülő menüvel
 
-```text
-folder1/
-└── folder2/
-    ├── folder3/
-    │   ├── file1
-    │   └── file2
-    └── folder4/
-        ├── file3
-        └── file4
-```
+#### Elemzés
+
+1. Elsődlegesen a kiadások grafikonos megjelenítése
+2. Kategorizálja akár a bevételt, de első soron a kiadásokat
+3. Ezeket mind kimutatja a szoftverben található módon, nap, hét, hónap, év, vagy akár egy saját magunk által megadott időszakban
+
+#### Rendszeres kifizetések
+
+1. Ez azt a célt szolgálja, hogy a például havi előfizetésekkel mutatja számunkra az egyenlegünk, ezzel is azt elősegítve, hogy mennyi pénzzel számoljunk igazán
+2. Rendszeres kifizetés hozzáadása (összeg, név, és kategória megadása)
+3. Rendszeres kifizetés eltávolítása
+
+
 
 ## Szükséges szoftverkomponensek
 
-Have a bug or a feature request? Please first read the [issue guidelines](https://reponame/blob/master/CONTRIBUTING.md) and search for existing and closed issues. If your problem or idea is not addressed yet, [please open a new issue](https://reponame/issues/new).
+1. Fejlesztői környezet és eszközök:\
+Android Studio: Az Android hivatalos fejlesztői környezete, amely Kotlin támogatással rendelkezik.\
+Kotlin Plugin: Az Android Studio alapértelmezetten támogatja a Kotlin nyelvet, de ha manuálisan kellene hozzáadni, ezt is be kell állítani.\
+Gradle: Az Android projektek építési automatizációjához és függőségkezeléséhez szükséges eszköz.
+2. Android SDK (Software Development Kit):\
+Az Android SDK biztosítja az eszközöket és API-kat az Android alkalmazás fejlesztéséhez.
+Tartalmazza az emulátorokat, futási időt, eszközkezelőket, valamint a különböző Android API szinteket (API level-eket).
+3. Függőségek és könyvtárak:\
+Jetpack komponensek: Ezek megkönnyítik az Android alkalmazások fejlesztését, és ajánlott őket használni.
+Navigation: Navigáció kezelés.
+ViewModel: Állapotkezelés.
+LiveData: Megfigyelhető adatok kezelése.
+Room: Lokális adatbázis-kezelő.
+Kotlin Coroutines: Könnyű és hatékony párhuzamos futtatás kezelése.
+Retrofit vagy OkHttp: Hálózati kommunikációhoz.
+Glide vagy Coil: Képek betöltéséhez és gyorsítótárazásához.
+4. Android Manifest fájl:\
+Az alkalmazás konfigurációs fájlja, amely tartalmazza az alkalmazás metaadatait, engedélyeket és a különböző komponenseket (Activity, Service, BroadcastReceiver).
+5. UI komponensek:\
+XML Layout fájlok: A felhasználói felület meghatározására szolgálnak.
+ViewBinding vagy DataBinding: Megkönnyíti a nézetek és az adatok összekapcsolását.
+6. Tesztelési eszközök:\
+Beépített szimulált Android eszköz
+7. Build-folyamat eszközök:\
+Firebase App Distribution: Az alkalmazás terjesztéséhez és béta teszteléséhez.
+8. Elemző és monitorozó eszközök:\
+Firebase Analytics: Felhasználói tevékenység elemzése.
+9. Verziókezelő rendszer:\
+Git: Verziókövetéshez és csapatmunkához (GitHub)
+
 
 ## A szoftver működésének műszaki feltételei
 
-Please read through our [contributing guidelines](https://reponame/blob/master/CONTRIBUTING.md). Included are directions for opening issues, coding standards, and notes on development.
+- Modern mobiltelefon
+- Internetelérés
+- nem tom hany MB, meg kiderul pontosan, majd szepen updatelve lesz
 
-Moreover, all HTML and CSS should conform to the [Code Guide](https://github.com/mdo/code-guide), maintained by [Main author](https://github.com/usernamemainauthor).
-
-Editor preferences are available in the [editor config](https://reponame/blob/master/.editorconfig) for easy use in common text editors. Read more and download plugins at <https://editorconfig.org/>.
 
 ## Készítők
 
@@ -59,10 +106,14 @@ Editor preferences are available in the [editor config](https://reponame/blob/ma
 
 - <https://github.com/cigranyxd>
 
-## Thanks
+## Köszönet
 
-Some Text
 
-## Copyright and license
+## Licencek
 
-Code and documentation copyright 2023-2024 the authors. Code released under the [MIT License](https://reponame/blob/master/LICENSE).
+
+## Felhasznált segítségek, vagy inspirációk
+
+- A dokumentációhoz használt minta: [https://github.com/Ismaestro/markdown-template/blob/master/README.md?plain=1](https://github.com/Ismaestro/markdown-template/blob/master/README.md?plain=1)
+- A ChatGPT által írt kód tettszésünkre, és megfelelésünkre való átírása
+- Más hasonló alkalmazások inspirációnak való felhasználása GitHubon
