@@ -54,9 +54,31 @@ Egy hétköznapi személy pénzének a könnyű, átlátható, és praktikus kez
 
 1. Ez azt a célt szolgálja, hogy a például havi előfizetésekkel mutatja számunkra az egyenlegünk, ezzel is azt elősegítve, hogy mennyi pénzzel számoljunk igazán
 2. Rendszeres kifizetés hozzáadása (összeg, név, és kategória megadása)
-3. Rendszeres kifizetés eltávolítása
+3. Rendszeres kifizetés eltávolítása, szerkesztése
 
+#### Adósságok
 
+1. Adósságok (név, összeg megadásával) hozzáadása, ez oly módon segít, mint a rendszeres kifizetéseknél, ha van, akkor levonja automatikusan az egyenlegből, ugyanazzal a céllal, mint az előbb említett fülnél
+2. Adósságok eltávolítása, szerkesztése
+
+#### Rendszeres bevételek
+
+1. Ha van ilyen, akkor be tudod álítani, hogy hányadikán legkésőbb, de a program automatikusan hozzáadja ezt az összeget az egyenleghez
+2. Ezeket a felhasználó képes is lesz eltávolítani, vagy változtatni
+
+#### Általános beállítások
+
+1. Betűméret
+2. Nyelv
+3. Felhasználói profil beállítások
+   - Profil adatok
+   - Jelszó változtatás
+   - Profil törlése
+5. Személyre szabás
+
+#### Kijelentkezés
+
+1. Kijelentkezteti a felhasználót a fiókjából
 
 ## Szükséges szoftverkomponensek
 
