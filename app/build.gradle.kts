@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.android.application")
     id("com.google.gms.google-services")
+
 }
 
 android {
@@ -45,6 +46,9 @@ dependencies {
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
     implementation(libs.firebase.database.ktx)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.firebase.firestore.ktx)
+    implementation(libs.places)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
@@ -52,6 +56,13 @@ dependencies {
     implementation(libs.firebase.auth.ktx)
     implementation(platform(libs.google.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.mpandroidchart)
+    implementation (libs.androidx.appcompat.v161)
+    implementation (libs.firebase.firestore)
+    implementation (libs.play.services.auth)
+    implementation (libs.play.services.base)
+    implementation (libs.play.services.auth)
+
 
 }
 

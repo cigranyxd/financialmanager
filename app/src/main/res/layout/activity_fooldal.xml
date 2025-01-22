@@ -70,45 +70,4 @@
         app:layout_constraintStart_toEndOf="@+id/hozzaadas_gomb"
         app:layout_constraintTop_toBottomOf="@+id/Aktualis_penz" />
 
-    <!-- Navigációs gombok -->
-    <Button
-        android:id="@+id/Fooldalbtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="Főoldal"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/ElemzesBtn"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <Button
-        android:id="@+id/ElemzesBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="Elemzés"
-        app:layout_constraintStart_toEndOf="@+id/Fooldalbtn"
-        app:layout_constraintEnd_toStartOf="@+id/gomb3"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/gomb3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="Gomb 3"
-        app:layout_constraintStart_toEndOf="@+id/ElemzesBtn"
-        app:layout_constraintEnd_toStartOf="@+id/gomb4"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
-    <Button
-        android:id="@+id/gomb4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginHorizontal="8dp"
-        android:text="Gomb 4"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/gomb3"
-        app:layout_constraintBottom_toBottomOf="parent" />
-
 </androidx.constraintlayout.widget.ConstraintLayout>

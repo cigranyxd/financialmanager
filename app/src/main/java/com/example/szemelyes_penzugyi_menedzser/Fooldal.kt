@@ -14,8 +14,8 @@ import android.widget.Spinner
 import android.widget.TextView
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.google.firebase.auth.FirebaseAuth
@@ -46,8 +46,8 @@ class Telefonszam : AppCompatActivity() {
         // Pénzösszeg megjelenítése
         aktualisPenzTextView = findViewById(R.id.JelenlegiText)
         AktualisPenzEditText = findViewById(R.id.Aktualis_penz)
-        aktualisPenz = getStoredAmount()
-        updateAmountDisplay()
+        aktualisPenz = MennyisegEltarol()
+        PenzosszegFrissites()
 
         // TextWatcher az AktualisPenzEditText mezőhöz és formázáshoz
         AktualisPenzEditText.addTextChangedListener(object : TextWatcher {
@@ -86,7 +86,7 @@ class Telefonszam : AppCompatActivity() {
 
                     // Az új érték mentése
                     aktualisPenz = number
-                    saveAmount(aktualisPenz)
+                    MennyisegMentes(aktualisPenz)
 
                     // A formázott szöveg visszaállítása
                     AktualisPenzEditText.setText(formatted)
@@ -113,12 +113,8 @@ class Telefonszam : AppCompatActivity() {
             showAmountInputDialog("Levonás", false)
         }
 
-        // Elemzés gomb eseménykezelője
-        val ElemzesBtn = findViewById<Button>(R.id.ElemzesBtn)
-        ElemzesBtn.setOnClickListener {
-            val intent = Intent(this, ElemzesActivity::class.java)
-            startActivity(intent)
-        }
+
+
         // Lenyíló menü inicializálása
         val spinner: Spinner = findViewById(R.id.lenyilo_menu)
         val lehetosegek = listOf("Főoldal", "Elemzés", "Rendszeres kifizetések", "Kijelentkezés")
@@ -149,7 +145,8 @@ class Telefonszam : AppCompatActivity() {
                         startActivity(intent)
                     }
                     "Rendszeres kifizetések" -> {
-                        Toast.makeText(this@Telefonszam, "Rendszeres kifizetések még nem implementáltak", Toast.LENGTH_SHORT).show()
+                        val intent = Intent(this@Telefonszam, Rendszeres_kifizetesek::class.java)
+                        startActivity(intent)
                     }
                     "Kijelentkezés" -> {
                         Kijelentkezes()
@@ -182,7 +179,7 @@ class Telefonszam : AppCompatActivity() {
     }
 
     // Pénzösszeg mentése SharedPreferences-be
-    private fun saveAmount(amount: Double) {
+    private fun MennyisegMentes(amount: Double) {
         val prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         val editor = prefs.edit()
         editor.putString("aktualisPenz", amount.toString())
@@ -190,14 +187,14 @@ class Telefonszam : AppCompatActivity() {
     }
 
     // Pénzösszeg betöltése SharedPreferences-ből
-    private fun getStoredAmount(): Double {
+    private fun MennyisegEltarol(): Double {
         val prefs = getSharedPreferences("UserPreferences", Context.MODE_PRIVATE)
         val amountString = prefs.getString("aktualisPenz", "0.0")
         return amountString?.toDouble() ?: 0.0
     }
 
     // Pénzösszeg frissítése és formázása
-    private fun updateAmountDisplay() {
+    private fun PenzosszegFrissites() {
         val df = DecimalFormat("#,##0.##", DecimalFormatSymbols().apply {
             groupingSeparator = '.'  // Ezres elválasztó pont
             decimalSeparator = ','   // Tizedes elválasztó vessző
@@ -216,7 +213,7 @@ class Telefonszam : AppCompatActivity() {
     }
 
     // Pénz bevitele vagy levonása
-    private fun showAmountInputDialog(action: String, isAdding: Boolean) {
+    private fun showAmountInputDialog(action: String, Hozzaad: Boolean) {
         val builder = AlertDialog.Builder(this)
         builder.setTitle(action)
 
@@ -238,10 +235,10 @@ class Telefonszam : AppCompatActivity() {
                     input.removeTextChangedListener(this)
 
                     try {
-                        val cleanString = s.toString().replace("[^0-9,.]".toRegex(), "")
+                        val LetisztitottString = s.toString().replace("[^0-9,.]".toRegex(), "")
 
                         // Számítás céljából a vesszőt pontra cseréljük
-                        val numberForCalculation = cleanString.replace(".", "").replace(",", ".")
+                        val numberForCalculation = LetisztitottString.replace(".", "").replace(",", ".")
                         val number = numberForCalculation.toDoubleOrNull() ?: 0.0
 
                         // Formázás a megfelelő elválasztókkal
@@ -267,14 +264,19 @@ class Telefonszam : AppCompatActivity() {
         builder.setPositiveButton("OK") { dialog, which ->
             val inputText = input.text.toString()
             // A számítás előtt átalakítjuk a formázott szöveget számmá
-            val amount = inputText.replace(".", "").replace(",", ".").toDoubleOrNull() ?: 0.0
-            aktualisPenz = if (isAdding) {
-                aktualisPenz + amount
+            val mennyiseg = inputText.replace(".", "").replace(",", ".").toDoubleOrNull() ?: 0.0
+
+            if (!Hozzaad && (mennyiseg <= 0 || mennyiseg > aktualisPenz)) {
+                Toast.makeText(this, "Érvénytelen összeg! Nem vonható le több, mint a jelenlegi egyenleg.", Toast.LENGTH_SHORT).show()
             } else {
-                aktualisPenz - amount
+                aktualisPenz = if (Hozzaad) {
+                    aktualisPenz + mennyiseg
+                } else {
+                    aktualisPenz - mennyiseg
+                }
+                MennyisegMentes(aktualisPenz)
+                PenzosszegFrissites()
             }
-            saveAmount(aktualisPenz)
-            updateAmountDisplay()
         }
 
         builder.setNegativeButton("Mégse") { dialog, which -> dialog.cancel() }
